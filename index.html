@@ -287,6 +287,9 @@
   </div>
   <div style="text-align:center;margin-top:16px;font-size:11px;color:#7d90ad">
     WASD move &nbsp;•&nbsp; MOUSE aim &nbsp;•&nbsp; CLICK fire &nbsp;•&nbsp; E shop &nbsp;•&nbsp; 1-6 quick buy</div>
+  <div style="text-align:center;margin-top:12px">
+    <button class="nbtn" id="soundToggle" style="border-color:#ffd76a;color:#ffd76a">SOUND: ON</button>
+  </div>
 </div></div>
 <div id="online"><div class="panel">
   <h2>ONLINE</h2>
@@ -1326,8 +1329,10 @@ function musicTick(){
 function musicStart(){ if(musicOn) return; musicOn=true; if(!musicTimer) musicTimer=setTimeout(musicTick, 10); }
 function musicStop(){ musicOn=false; }
 const muteBtn=document.getElementById('mute');
-function setMute(v){ muted=v; try{ localStorage.setItem('tw.mute', v?'1':'0'); }catch(e){} muteBtn.textContent = muted?'🔇':'🔊'; }
+const soundToggleBtn=document.getElementById('soundToggle');
+function setMute(v){ muted=v; try{ localStorage.setItem('tw.mute', v?'1':'0'); }catch(e){} muteBtn.textContent = muted?'🔇':'🔊'; if(soundToggleBtn) soundToggleBtn.textContent = 'SOUND: ' + (muted?'OFF':'ON'); }
 muteBtn.onclick=()=>{ ac(); setMute(!muted); };
+if(soundToggleBtn) soundToggleBtn.onclick=()=>{ ac(); setMute(!muted); };
 setMute(muted);
 /* ============================================================
    FX
